@@ -1,3 +1,5 @@
+// Load environment variables
+require('dotenv').load();
 // Express imports
 const express = require('express');
 const server = express();
@@ -6,8 +8,10 @@ const bodyparser = require('body-parser');
 // Database imports
 const mongoose = require('mongoose');
 
-const DATABASE_NAME = 'letzgo_database';
-const CONNECTION_STRING = 'mongodb+srv://sam:A7wf1XbQpxoCyZI3@letzgo-cluster-fspr1.mongodb.net/' + DATABASE_NAME +'?retryWrites=true';
+const DATABASE_NAME = process.env.dbName;
+const dbUser = process.env.dbUser;
+const dbPassword = process.env.dbPassword;
+const CONNECTION_STRING = 'mongodb+srv://'+ dbUser + ':' + dbPassword + '@letzgo-cluster-fspr1.mongodb.net/' + DATABASE_NAME +'?retryWrites=true';
 
 // Connect to the mongo database
 mongoose.connect(CONNECTION_STRING,

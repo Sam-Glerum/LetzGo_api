@@ -10,7 +10,7 @@ function encodeToken(username) {
         sub: username
     };
 
-    return jwt.encode(payload, config.secretKey, null, null)
+    return jwt.encode(payload, process.env.secretKey, null, null)
 }
 
 // Decode (token to username)
