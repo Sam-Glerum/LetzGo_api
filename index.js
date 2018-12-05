@@ -26,10 +26,28 @@ mongoose.connection
 // Load the body-parser to read the request body
 server.use(bodyparser.json());
 
-// Load routes
+//CORS headers
+server.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
+    if (req.method === 'OPTIONS') {
+        res.status(200);
+        res.end();
+    } else {
+        next();
+    }
+    //next();
+});
+
+/*
+Load routes
+*/
 // Load Authentication routes
 server.use('/api', require('./routes/authentication_routes_v1'));
+
 
 server.get('/api', (req, res) => {
     res.json("Welcome to the V1 LetzGo api")

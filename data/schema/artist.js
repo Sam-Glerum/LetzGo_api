@@ -8,7 +8,7 @@ let artistSchema = new Schema({
     description: {type: String},
     discography: [{
         title : String,
-        releaseyear: String
+        releaseYear: String
     }]
 });
 
