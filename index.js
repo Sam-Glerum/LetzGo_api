@@ -22,6 +22,11 @@ mongoose.connection
 // Load the body-parser to read the request body
 server.use(bodyparser.json());
 
+// Load routes
+
+// Load Authentication routes
+server.use('/api', require('./routes/authentication_routes_v1'));
+
 server.get('/api', (req, res) => {
     res.json("Welcome to the V1 LetzGo api")
 });
