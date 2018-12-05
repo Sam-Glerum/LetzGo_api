@@ -54,25 +54,26 @@ router.post('/login', (req, res) => {
 });
 
 // Change Password route
-router.post('/user/changepassword', (req, res) => {
-    const changePasswordInfo = request.body;
-
-    if (!checkObjects.isValidPasswordChange(changePasswordInfo)) {
-        const error = apiErrors.wrongRequestBodyProperties;
-        res.status(error.status).json(error);
-        return;
-    }
-
-    const password = changePasswordInfo.password;
-    const newPassword = changePasswordInfo.newPassword;
-
-    userRepo.changePassword(req.user.username, password, newPassword, res);
-});
-
-// Delete user route
-router.delete('/user', (req, res) => {
-    userRepo.deleteUser(req.user.username, res);
-});
-
+// router.post('/user/changepassword', (req, res) => {
+//     const changePasswordInfo = request.body;
+//
+//     if (!checkObjects.isValidPasswordChange(changePasswordInfo)) {
+//         const error = apiErrors.wrongRequestBodyProperties;
+//         res.status(error.status).json(error);
+//         return;
+//     }
+//
+//     const password = changePasswordInfo.password;
+//     const newPassword = changePasswordInfo.newPassword;
+//
+//     userRepo.changePassword(req.user.username, password, newPassword, res);
+// });
+//
+// // Delete user route
+// router.delete('/user', (req, res) => {
+//     // let user = req.body;
+//     userRepo.deleteUser(req.user.username, req.user.password, res);
+// });
+//
 
 module.exports = router;
