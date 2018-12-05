@@ -1,3 +1,5 @@
+const Isemail = require('isemail');
+
 module.exports = class CheckObjects {
     // Returns true if the given object is a valid login
     static isValidLogin(object) {

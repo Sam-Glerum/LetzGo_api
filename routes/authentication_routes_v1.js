@@ -31,11 +31,12 @@ router.post('/register', (req, res) => {
         return;
     }
 
-    const username = registerInfo.username;
-    const email = registerInfo.email;
-    const password = registerInfo.password;
+    const username = registerInfo.username.trim().toLowerCase();
+    const email = registerInfo.email.trim().toLowerCase();
+    const password = registerInfo.password.trim();
+    const dateofbirth = registerInfo.dateofbirth;
 
-    userRepo.createUser(username, password, res);
+    userRepo.createUser(username, email, password, dateofbirth, res);
 });
 
 // Login route
