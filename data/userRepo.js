@@ -1,5 +1,6 @@
 const User = require('./schema/user');
 const jsonModel = require('../models/response/JsonModel');
+const authentication = require('../authentication/authentication');
 
 module.exports = class userRepo {
 
@@ -15,18 +16,23 @@ module.exports = class userRepo {
                     });
                     newUser.save()
                         .then((user) => {
-                            res.status(201).json(new jsonModel("/api", "POST", 201, "User " + user.username + " has been created"));
+                            let token = authentication.encodeToken(usernameParam);
+                            res.status(201).json({
+                                response: new jsonModel("/api/register", "POST", 201, "User " + user.username + " has been created"),
+                                token: token
+                            });
                         })
                         .catch(() => {
-                            res.status(500).json(new jsonModel("/api", "POST", 500, "Something went wrong. User " + user.username + " has not been created"));
+                            res.status(500).json(new jsonModel("/api/register", "POST", 500, "Something went wrong. User " + usernameParam + " has not been created"));
                         })
                 } else {
-                    res.status(409).json(new jsonModel("/api", "POST", 409, "User " + user.username + " already exists"));
+                    res.status(409).json(new jsonModel("/api/register", "POST", 409, "User " + user.username + " already exists"));
                 }
             })
             .catch(() => {
-                res.status(500).json(new jsonModel("/api", "POST", 500, "Something went wrong. Please try again"));
+                res.status(500).json(new jsonModel("/api/register", "POST", 500, "Something went wrong. Please try again"));
             })
-
     }
+
+
 };

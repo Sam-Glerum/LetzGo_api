@@ -27,7 +27,7 @@ router.all(new RegExp("^(?!\/login$|\/register$).*"), (req, res, next) => {
 router.post('/register', (req, res) => {
     const registerInfo = req.body;
     if (!checkObjects.isValidRegistration(registerInfo)) {
-        res.status(error.status).json(apiErrors.wrongRequestBodyProperties);
+        res.status(412).json(apiErrors.wrongRequestBodyProperties);
         return;
     }
 
@@ -43,7 +43,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const loginInfo = req.body;
     if (!checkObjects.isValidLogin(loginInfo)) {
-        res.status(error.status).json(apiErrors.wrongRequestBodyProperties);
+        res.status(412).json(apiErrors.wrongRequestBodyProperties);
         return;
     }
 
