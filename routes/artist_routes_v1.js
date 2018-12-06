@@ -3,7 +3,7 @@ const router = express.Router();
 const artistRepo = require('../data/repository/artistRepo');
 
 router.get('/', (req, res) => {
-    res.json("test");
+    res.json("artist");
 });
 
 router.post('/', (req, res) => {
