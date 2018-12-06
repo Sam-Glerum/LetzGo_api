@@ -3,7 +3,7 @@ const router = express.Router();
 const authentication = require('../authentication/authentication');
 const checkObjects = require('../models/CheckObjects');
 const apiErrors = require('../models/error/apiErrors');
-const userRepo = require('../data/userRepo');
+const userRepo = require('../data/repository/userRepo');
 
 router.all(new RegExp("^(?!\/login$|\/register$).*"), (req, res, next) => {
     // Get token from headers

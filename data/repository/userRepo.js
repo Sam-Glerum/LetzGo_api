@@ -1,7 +1,7 @@
-const User = require('./schema/user');
-const jsonModel = require('../models/response/JsonModel');
-const authentication = require('../authentication/authentication');
-const apiErrors = require('../models/error/apiErrors');
+const User = require('../schema/user');
+const jsonModel = require('../../models/response/JsonModel');
+const authentication = require('../../authentication/authentication');
+const apiErrors = require('../../models/error/apiErrors');
 
 module.exports = class userRepo {
 
