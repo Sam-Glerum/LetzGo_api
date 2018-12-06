@@ -47,6 +47,8 @@ Load routes
 */
 // Load Authentication routes
 server.use('/api', require('./routes/authentication_routes_v1'));
+// Load artist routes
+server.use('/api/artist', require('./routes/artist_routes_v1'));
 
 
 server.get('/api', (req, res) => {
