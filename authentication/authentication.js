@@ -5,7 +5,7 @@ const config = require('../config/config');
 // Encode (username to token)
 function encodeToken(username) {
     const payload = {
-        exp: moment().add(10, 'days').unix(),
+        exp: moment().add(5, 'days').unix(),
         iat: moment().unix(),
         sub: username
     };
@@ -16,7 +16,7 @@ function encodeToken(username) {
 // Decode (token to username)
 function decodeToken(token, cb) {
     try {
-        const payload = jwt.decode(token, config.secretKey, null, null);
+        const payload = jwt.decode(token, process.env.secretKey, null, null);
 
         const now = moment.now();
 
