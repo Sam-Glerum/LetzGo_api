@@ -13,7 +13,7 @@ module.exports = class artistRepo {
                 if (artist === null) {
                     const newArtist = new Artist({
                         name: artistName,
-                        picure: imagePath,
+                        picture: imagePath,
                         genre: genreParam,
                         description: descriptionContent,
                         discography: discographyParam
