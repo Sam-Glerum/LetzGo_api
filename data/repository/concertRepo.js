@@ -13,7 +13,15 @@ module.exports = class concertRepo {
             .then((concert) => {
                 if (concert === null ) {
                     const newConcert = new Concert({
-
+                        name: nameParam,
+                        date: dateParam,
+                        city: cityParam,
+                        street: streetParam,
+                        houseNumber: houseNumberParam,
+                        zipCode: zipCodeParam,
+                        price: priceParam,
+                        description: descriptionParam,
+                        artists: artistParam
                     });
 
                     newConcert.save()
@@ -29,7 +37,7 @@ module.exports = class concertRepo {
                                 url,
                                 httpMethod,
                                 500,
-                                "Something went wrong. Concert " + concert.name + " has not been created."));
+                                "Something went wrong. Concert " + nameParam + " has not been created."));
                         })
                 } else {
                     res.status(409).json(new jsonModel(url, httpMethod, 409, "Concert already exists."))
