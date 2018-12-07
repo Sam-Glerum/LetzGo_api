@@ -7,7 +7,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:concertId', (req, res) => {
-   res.json("get specific concert");
+    const concertId = req.params.concertId;
+    concertRepo.getConcertById(concertId, res);
+    // res.json("get specific concert");
 });
 
 router.post('/', (req, res) => {

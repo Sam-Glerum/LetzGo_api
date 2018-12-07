@@ -33,6 +33,20 @@ module.exports = class concertRepo {
             })
     }
 
+    static getConcertById(concertID, res) {
+        const url = "/api/concerts/:concertId";
+        const httpMethod = "GET";
+
+        Concert.findOne({_id: concertID})
+            .then((concert) => {
+                console.log("concert 200" + concert);
+                res.status(200).json({"concert": concert});
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "No concert found"));
+            })
+    }
+
     static createConcert(nameParam, dateParam, cityParam, streetParam, houseNumberParam,
                          zipCodeParam, priceParam, descriptionParam, artistParam, res) {
         const url = "/api/concerts";
@@ -69,7 +83,11 @@ module.exports = class concertRepo {
                                 "Something went wrong. Concert " + nameParam + " has not been created."));
                         })
                 } else {
-                    res.status(409).json(new jsonModel(url, httpMethod, 409, "Concert already exists."))
+                    res.status(409).json(new jsonModel(
+                        url,
+                        httpMethod,
+                        409,
+                        "Concert already exists."));
                 }
             })
             .catch(() => {
