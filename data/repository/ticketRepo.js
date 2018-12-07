@@ -5,6 +5,29 @@ const jsonModel = require('../../models/response/JsonModel');
 
 module.exports = class ticketRepo {
 
+    static getAllTickets(res) {
+        const url = "/api/tickets";
+        const httpMethod = "GET";
+
+        let ticketArray = [];
+
+        Ticket.find()
+            .then((tickets) => {
+                for (let ticket of tickets) {
+                    ticketArray.push({
+                        concert: ticket.concert,
+                        user: ticket.user,
+                        ticketCode: ticket.ticketCode
+                    });
+                }
+                res.status(200).json({
+                    "tickets": ticketArray})
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "No tickets found"));
+            })
+    }
+
     static createTicket(concertId, userId, res) {
         const url = "/api/tickets";
         const httpMethod = "POST";
