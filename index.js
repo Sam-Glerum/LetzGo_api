@@ -51,6 +51,8 @@ server.use('/api', require('./routes/authentication_routes_v1'));
 server.use('/api/artists', require('./routes/artist_routes_v1'));
 // Load concert routes
 server.use('/api/concerts', require('./routes/concert_routes_v1'));
+// Load ticket routes
+server.use('/api/tickets', require('./routes/ticket_routes_v1'));
 
 server.get('/api', (req, res) => {
     res.json("Welcome to the V1 LetzGo api")
