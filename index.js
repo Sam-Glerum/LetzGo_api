@@ -48,7 +48,7 @@ Load routes
 // Load Authentication routes
 server.use('/api', require('./routes/authentication_routes_v1'));
 // Load artist routes
-server.use('/api/artist', require('./routes/artist_routes_v1'));
+server.use('/api/artists', require('./routes/artist_routes_v1'));
 // Load concert routes
 server.use('/api/concerts', require('./routes/concert_routes_v1'));
 

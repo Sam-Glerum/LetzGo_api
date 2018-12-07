@@ -5,8 +5,33 @@ const apiErrors = require('../../models/error/apiErrors');
 
 module.exports = class artistRepo {
 
+    static getAllArtists(res) {
+        let url = "/api/artists";
+        let httpMethod = "GET";
+
+        let artistArray = [];
+
+        Artist.find()
+            .then((artists) => {
+                for (let artist of artists) {
+                    artistArray.push({
+                        "name": artist.name,
+                        "picture": artist.picture,
+                        "genre": artist.genre,
+                        "description": artist.description,
+                        "discography": artist.discography
+                    });
+
+                    res.status(200).json({"artists": artistArray});
+                }
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "No artists found"));
+            })
+    }
+
     static createArtist(artistName, imagePath, genreParam, descriptionContent, discographyParam, res) {
-        let url = "/api/artist";
+        let url = "/api/artists";
         let httpMethod = "POST";
         Artist.findOne({name: artistName})
             .then((artist) => {
