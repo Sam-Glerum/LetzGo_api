@@ -4,6 +4,7 @@ require('dotenv').load();
 const express = require('express');
 const server = express();
 const bodyparser = require('body-parser');
+let PORT = process.env.PORT || 3000;
 
 // Database imports
 const mongoose = require('mongoose');
@@ -58,6 +59,6 @@ server.get('/api', (req, res) => {
     res.json("Welcome to the V1 LetzGo api")
 });
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log("server works");
 });
