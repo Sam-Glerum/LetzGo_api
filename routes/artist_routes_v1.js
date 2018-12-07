@@ -6,6 +6,11 @@ router.get('/', (req, res) => {
     artistRepo.getAllArtists(res);
 });
 
+router.get('/:artistId', (req, res) => {
+    let artistId = req.params.artistId;
+    artistRepo.getArtistById(artistId, res);
+});
+
 router.post('/', (req, res) => {
     let artistInfo = req.body;
 

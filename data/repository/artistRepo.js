@@ -15,6 +15,7 @@ module.exports = class artistRepo {
             .then((artists) => {
                 for (let artist of artists) {
                     artistArray.push({
+                        "_id": artist.id,
                         "name": artist.name,
                         "picture": artist.picture,
                         "genre": artist.genre,
@@ -27,6 +28,19 @@ module.exports = class artistRepo {
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No artists found"));
+            })
+    }
+
+    static getArtistById(artistId, res) {
+        let url = "/api/artists";
+        let httpMethod = "GET";
+
+        Artist.findOne({_id: artistId})
+            .then((artist) => {
+                res.status(200).json(artist);
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Artist not found"));
             })
     }
 
