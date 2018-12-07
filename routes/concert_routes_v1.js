@@ -3,7 +3,11 @@ const router = express.Router();
 const concertRepo = require('../data/repository/concertRepo');
 
 router.get('/', (req, res) => {
-    res.json("concerts");
+    concertRepo.getAllConcerts(res);
+});
+
+router.get('/:concertId', (req, res) => {
+   res.json("get specific concert");
 });
 
 router.post('/', (req, res) => {

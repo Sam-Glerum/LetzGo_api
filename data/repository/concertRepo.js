@@ -4,6 +4,35 @@ const apiErrors = require('../../models/error/apiErrors');
 
 module.exports = class concertRepo {
 
+    static getAllConcerts(res) {
+        const url = "/api/concerts";
+        const httpMethod = "GET";
+
+        let concertArray = [];
+
+        Concert.find()
+            .then((concerts) => {
+                for (let concert of concerts) {
+                    concertArray.push({
+                        "_id": concert.id,
+                        "name": concert.name,
+                        "date": concert.date.toLocaleString(),
+                        "city": concert.city,
+                        "street": concert.street,
+                        "houseNumber": concert.houseNumber,
+                        "zipCode": concert.zipCode,
+                        "price": concert.price,
+                        "description": concert.description,
+                        "artists": concert.artists
+                    });
+                }
+                res.status(200).json({"concerts": concertArray});
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "No concerts found"));
+            })
+    }
+
     static createConcert(nameParam, dateParam, cityParam, streetParam, houseNumberParam,
                          zipCodeParam, priceParam, descriptionParam, artistParam, res) {
         const url = "/api/concerts";
