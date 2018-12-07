@@ -6,6 +6,11 @@ router.get('/', (req, res) => {
     ticketRepo.getAllTickets(res);
 });
 
+router.get('/:ticketId', (req, res) => {
+    let ticketId = req.params.ticketId;
+    ticketRepo.getTicketById(ticketId, res);
+});
+
 router.post('/:concertId/:userId', (req, res) => {
     const concertId = req.params.concertId;
     const userId = req.params.userId;

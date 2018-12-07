@@ -28,6 +28,21 @@ module.exports = class ticketRepo {
             })
     }
 
+    static getTicketById(ticketId, res) {
+        const url = "/api/tickets/:ticketId";
+        const httpMethod = "GET";
+
+        Ticket.findOne({_id: ticketId})
+            .then((ticket) => {
+                res.status(200).json({
+                    "ticket": ticket
+                });
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Ticket not found"));
+            })
+    }
+
     static createTicket(concertId, userId, res) {
         const url = "/api/tickets";
         const httpMethod = "POST";
