@@ -9,6 +9,10 @@ let artistSchema = new Schema({
     discography: [{
         title : String,
         releaseYear: String
+    }],
+    concerts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Concert'
     }]
 });
 
