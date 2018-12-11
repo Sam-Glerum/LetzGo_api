@@ -15,6 +15,7 @@ module.exports = class ticketRepo {
             .then((tickets) => {
                 for (let ticket of tickets) {
                     ticketArray.push({
+                        id: ticket._id,
                         concert: ticket.concert,
                         user: ticket.user,
                         ticketCode: ticket.ticketCode
