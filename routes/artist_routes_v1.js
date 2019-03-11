@@ -30,9 +30,16 @@ router.post('/', (req, res) => {
 
 // Update an existing artist in the db
 router.put('/:artistId', (req, res) => {
+    let artistId = req.params.artistId;
     let artistInfo = req.body;
 
-    artistRepo.updateArtist();
+    artistRepo.updateArtist(artistId, artistInfo, res);
 });
 
+// Delete an artist from the db
+router.delete('/:artistId', (req, res) => {
+    let artistId = req.params.artistId;
+
+    artistRepo.deleteArtist(artistId, res);
+});
 module.exports = router;

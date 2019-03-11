@@ -72,4 +72,34 @@ module.exports = class artistRepo {
             })
     }
 
+    static updateArtist(artistID, artistInfo, res) {
+        let url = "/api/artists/" + artistID;
+        let httpMethod = "PUT";
+
+        Artist.findOneAndUpdate({_id: artistID}, {
+            "name": artistInfo.name,
+            "picture": artistInfo.picture,
+            "genre": artistInfo.genre,
+            "description": artistInfo.description,
+            "discography": artistInfo.discography
+        }).then(() => {
+            res.status(200).json(new jsonModel(url, httpMethod, 200, "Artist successfully updated."))
+        }).catch(() => {
+            res.status(500).json(new jsonModel(url, httpMethod, 500, "Something went wrong."))
+        })
+    }
+
+    static deleteArtist(artistID, res) {
+        let url = "/api/artists/" + artistID;
+        let httpMethod = "DELETE";
+
+        Artist.findByIdAndRemove(artistID)
+            .then(() => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Artist " + artistID + " successfully deleted"));
+            })
+            .catch(() => {
+                res.status(500).json(new jsonModel(url, httpMethod, 500, "Something went wrong"));
+            })
+    }
+
 };
