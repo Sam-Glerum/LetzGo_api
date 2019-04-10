@@ -18,4 +18,10 @@ router.post('/:concertId/:userId', (req, res) => {
     ticketRepo.createTicket(concertId, userId, res);
 });
 
+router.delete('/:ticketId', (req, res) => {
+    const ticketId = req.params.ticketId;
+
+    ticketRepo.deleteTicketByID(ticketId, res);
+});
+
 module.exports = router;
