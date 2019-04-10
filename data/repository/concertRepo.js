@@ -111,4 +111,17 @@ module.exports = class concertRepo {
                 ))
             })
     }
+
+    static deleteConcertByID(concertID, res) {
+        const url = "/api/concerts";
+        const httpMethod = "DELETE";
+
+        Concert.findByIdAndDelete(concertID)
+            .then((concert) => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Concert " + concertID + " has been successfully deleted"));
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Concert " + concertID + " does not exist"));
+            })
+    };
 };
