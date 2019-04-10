@@ -39,11 +39,23 @@ module.exports = class concertRepo {
 
         Concert.findOne({_id: concertID})
             .then((concert) => {
-                console.log("concert 200" + concert);
                 res.status(200).json({"concert": concert});
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No concert found"));
+            })
+    }
+
+    static getConcertByName(concertNameParam, res) {
+        const url = "/api/concerts";
+        const httpMethod = "GET";
+
+        Concert.findOne({name: nameParam})
+            .then((concert) => {
+                res.status(200).json({"concert": concert})
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Concert " + concertNameParam + " not found"))
             })
     }
 
@@ -99,4 +111,41 @@ module.exports = class concertRepo {
                 ))
             })
     }
+
+    static updateConcertByID(concertID, nameParam, dateParam, cityParam, streetParam, houseNumberParam,
+                             zipCodeParam, priceParam, descriptionParam, artistParam, res) {
+        const url = "/api/concerts";
+        const httpMethod = "PUT";
+
+        Concert.findOneAndUpdate(concertID, {
+            name: nameParam,
+            date: dateParam,
+            city: cityParam,
+            street: streetParam,
+            houseNumber: houseNumberParam,
+            zipCode: zipCodeParam,
+            price: priceParam,
+            description: descriptionParam,
+            artists: artistParam
+        })
+            .then((concert) => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Concert " + concertID + " has been successfully updated"));
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Concert " + concertID + " has not been found"));
+            })
+    }
+
+    static deleteConcertByID(concertID, res) {
+        const url = "/api/concerts";
+        const httpMethod = "DELETE";
+
+        Concert.findByIdAndDelete(concertID)
+            .then((concert) => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Concert " + concertID + " has been successfully deleted"));
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Concert " + concertID + " does not exist"));
+            })
+    };
 };
