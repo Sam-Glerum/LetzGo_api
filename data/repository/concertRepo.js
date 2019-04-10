@@ -39,11 +39,23 @@ module.exports = class concertRepo {
 
         Concert.findOne({_id: concertID})
             .then((concert) => {
-                console.log("concert 200" + concert);
                 res.status(200).json({"concert": concert});
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No concert found"));
+            })
+    }
+
+    static getConcertByName(concertNameParam, res) {
+        const url = "/api/concerts";
+        const httpMethod = "GET";
+
+        Concert.findOne({name: nameParam})
+            .then((concert) => {
+                res.status(200).json({"concert": concert})
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Concert " + concertNameParam + " not found"))
             })
     }
 
