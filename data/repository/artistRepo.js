@@ -41,7 +41,20 @@ module.exports = class artistRepo {
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "Artist not found"));
             })
-    }
+    };
+
+    static getArtistByname(artistName, res) {
+        let url = "/api/artists";
+        let httpMethod = "GET";
+
+        Artist.findOne({name: artistName})
+            .then((artist) => {
+                res.status(200).json(artist);
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Artist " + artistName + " not found"));
+            })
+    };
 
     static createArtist(artistName, imagePath, genreParam, descriptionContent, discographyParam, res) {
         let url = "/api/artists";
