@@ -100,6 +100,23 @@ module.exports = class ticketRepo {
             })
     }
 
+    static updateTicketByID(ticketId, ticket, res) {
+        const url = "/api/tickets";
+        const httpMethod = "PUT";
+
+        Ticket.findByIdAndUpdate(ticketId, {
+            concert: ticket.concert,
+            user: ticket.user,
+            ticketCode: ticket.userCode
+        })
+            .then((ticket) => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Ticket " + ticketID + " has been successfully updated"));
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Ticket " + ticketID + " has not been found"));
+            })
+    }
+
     static deleteTicketByID(ticketID, res) {
         const url = "/api/tickets/:ticketId";
         const httpMethod = "DELETE";
