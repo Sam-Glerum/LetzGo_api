@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     const concertInfo = req.body;
     concertRepo.createConcert(
         concertInfo.name,
-        concertInfo.dateParam,
+        concertInfo.date,
         concertInfo.city,
         concertInfo.street,
         concertInfo.houseNumber,
@@ -26,6 +26,31 @@ router.post('/', (req, res) => {
         [],
         res
     )
+});
+
+router.put('/:concertId', (req, res) => {
+    const concertId = req.params.concertId;
+    const concertInfo = req.body;
+
+    concertRepo.updateConcertByID(
+        concertId,
+        concertInfo.name,
+        concertInfo.date,
+        concertInfo.city,
+        concertInfo.street,
+        concertInfo.houseNumber,
+        concertInfo.zipCode,
+        concertInfo.price,
+        concertInfo.description,
+        concertInfo.artists,
+        res
+    )
+});
+
+router.delete('/:concertId', (req, res) => {
+    const concertId = req.params.concertId;
+
+    concertRepo.deleteConcertByID(concertId, res);
 });
 
 module.exports = router;
