@@ -99,4 +99,17 @@ module.exports = class ticketRepo {
                 res.status(500).json(new jsonModel(url, httpMethod, 500, "Something went wrong. Please try again"));
             })
     }
+
+    static deleteTicketByID(ticketID, res) {
+        const url = "/api/tickets/:ticketId";
+        const httpMethod = "DELETE";
+
+        Ticket.findByIdAndDelete(ticketID)
+            .then(() => {
+                res.status(200).json(new jsonModel(url, httpMethod, 200, "Ticket " + ticketID + " has been successfully deleted"));
+            })
+            .catch(() => {
+                res.status(404).json(new jsonModel(url, httpMethod, 404, "Ticket " + ticketID + " has not been found"));
+            })
+    }
 };
