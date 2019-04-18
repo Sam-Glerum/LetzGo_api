@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
         artistInfo.picture,
         artistInfo.genre,
         artistInfo.description,
-        artistInfo.discography,
+        null,
         res
     );
 });
