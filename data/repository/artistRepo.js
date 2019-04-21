@@ -105,7 +105,7 @@ module.exports = class artistRepo {
         let url = "/api/artists/" + artistID;
         let httpMethod = "PUT";
 
-        Artist.findOneAndReplace({artistID}, {
+        Artist.findOneAndReplace({_id :artistID}, {
             "name": artistInfo.name,
             "picture": artistInfo.picture,
             "genre": artistInfo.genre,
