@@ -105,12 +105,13 @@ module.exports = class artistRepo {
         let url = "/api/artists/" + artistID;
         let httpMethod = "PUT";
 
-        Artist.findOneAndReplace(artistID, {
+        Artist.findOneAndReplace({artistID}, {
             "name": artistInfo.name,
             "picture": artistInfo.picture,
             "genre": artistInfo.genre,
             "description": artistInfo.description,
-            "discography": artistInfo.discography
+            "discography": artistInfo.discography,
+            "concerts": artistInfo.concerts
         }).then(() => {
             res.status(200).json(new jsonModel(url, httpMethod, 200, "Artist successfully updated."))
         }).catch(() => {
