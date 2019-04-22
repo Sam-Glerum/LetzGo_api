@@ -66,7 +66,7 @@ module.exports = class ticketRepo {
         let newUser = "";
             User.findOne({username: userId})
                 .then((user) => {
-                   newUser = user._id
+                   newUser = user.username
                 })
                 .catch(() => {
                     res.status(404).json(new jsonModel(url, httpMethod, 404, "User not found"));
