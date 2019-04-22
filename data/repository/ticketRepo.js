@@ -64,7 +64,7 @@ module.exports = class ticketRepo {
             console.log("Concert: " + newConcert);
 
         let newUser = "";
-            User.findOne({_id: userId})
+            User.findOne({username: userId})
                 .then((user) => {
                    newUser = user._id
                 })
