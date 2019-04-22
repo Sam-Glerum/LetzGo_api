@@ -26,7 +26,7 @@ module.exports = class concertRepo {
                         "artists": concert.artists
                     });
                 }
-                res.status(200).json({"concerts": concertArray});
+                res.status(200).json(concertArray);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No concerts found"));
