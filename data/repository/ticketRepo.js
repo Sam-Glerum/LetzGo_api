@@ -21,8 +21,7 @@ module.exports = class ticketRepo {
                         ticketCode: ticket.ticketCode
                     });
                 }
-                res.status(200).json({
-                    "tickets": ticketArray})
+                res.status(200).json(ticketArray)
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No tickets found"));
@@ -35,9 +34,7 @@ module.exports = class ticketRepo {
 
         Ticket.findOne({_id: ticketId})
             .then((ticket) => {
-                res.status(200).json({
-                    "ticket": ticket
-                });
+                res.status(200).json(ticket);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "Ticket not found"));
