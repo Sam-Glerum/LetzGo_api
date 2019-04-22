@@ -117,7 +117,7 @@ module.exports = class concertRepo {
         const url = "/api/concerts";
         const httpMethod = "PUT";
 
-        Concert.findOneAndUpdate(concertID, {
+        Concert.findOneAndUpdate({_id: concertID}, {
             name: nameParam,
             date: dateParam,
             city: cityParam,
