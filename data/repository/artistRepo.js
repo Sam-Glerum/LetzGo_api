@@ -23,7 +23,7 @@ module.exports = class artistRepo {
                         "discography": artist.discography
                     });
                 }
-                res.status(200).json({"artists": artistArray});
+                res.status(200).json(artistArray);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No artists found"));
