@@ -27,21 +27,23 @@ mongoose.connection
 // Load the body-parser to read the request body
 server.use(bodyparser.json());
 
-//CORS headers
-server.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || 'https://letzgo.herokuapp.com/' || 'http://localhost:4200');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, x-access-token');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+// //CORS headers
+// server.use(function(req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN || 'https://letzgo.herokuapp.com/' || 'http://localhost:4200');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, x-access-token');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    if (req.method === 'OPTIONS') {
-        res.status(200);
-        res.end();
-    } else {
-        next();
-    }
-    //next();
-});
+//     if (req.method === 'OPTIONS') {
+//         res.status(200);
+//         res.end();
+//     } else {
+//         next();
+//     }
+//     //next();
+// });
+var cors = require('cors')
+server.use(cors())
 
 /*
 Load routes
