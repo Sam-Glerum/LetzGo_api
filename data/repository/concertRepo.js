@@ -39,7 +39,7 @@ module.exports = class concertRepo {
 
         Concert.findOne({_id: concertID})
             .then((concert) => {
-                res.status(200).json({"concert": concert});
+                res.status(200).json(concert);
             })
             .catch(() => {
                 res.status(404).json(new jsonModel(url, httpMethod, 404, "No concert found"));
