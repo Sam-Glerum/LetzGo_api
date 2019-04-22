@@ -9,7 +9,7 @@ let concertSchema = new Schema({
     street: {type: String, required: true},
     houseNumber: {type: String, required: true},
     zipCode: {type: String, required: true},
-    price: {type: Schema.Types.Decimal128, required: true},
+    price: {type: Number, required: true},
     description: {type: String},
     artists: [{
         type: Schema.Types.ObjectId,
